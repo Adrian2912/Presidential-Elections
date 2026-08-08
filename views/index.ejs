@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Presidential Elections-Register</title>
+        <link rel="stylesheet" href="/stylesheets/registerStyle.css">
+    </head>
+    <body>
+        <div id="registerFields">
+            <h1>Register</h1>
+            <form action="/users/createAccount" method="POST">
+                <input type="text" id="firstName" name="first_name" placeholder="First Name" oninput="isNameValid(firstName, isFirstNameValid)" onfocus="showWarning('firstNameAndLastNameWarning')" onblur="hideWarning('firstNameAndLastNameWarning')"required>
+                <input type="text" id="lastName" name="last_name" placeholder="Last Name" oninput="isNameValid(lastName, isLastNameValid)" onfocus="showWarning('firstNameAndLastNameWarning')" onblur="hideWarning('firstNameAndLastNameWarning')" required>
+                <div>
+                    <span class="warningMessages" id="firstNameAndLastNameWarning">First name and last name can contains letters, spaces and '-' only</span>
+                </div>
+                <input type="email" id="userEmail" name="email" placeholder="email" required>
+                <div id="passwordRequirements">
+                    <div>
+                        <input type="password" id="userPassword" name="password" placeholder="Password" required>
+                        <button id="passwordView">
+                            <img src="/images/slashedEye.png" alt="anEye" id="showPasswordImage">
+                        </button>
+                    </div>
+                    <div id="passwordStrengthParameters">
+                        <span class="strengthParameter warningMessages">Your password must contain at least eight characters</span>
+                        <span class="strengthParameter warningMessages">Your password must contain an uppercase letter</span>
+                        <span class="strengthParameter warningMessages">Your password must contain a lowercase letter</span>
+                        <span class="strengthParameter warningMessages">Your password must contain a digit</span>
+                        <span class="strengthParameter warningMessages">Your password must contain a special character</span>
+                    </div>
+                </div>
+                <input type="password" placeholder="Confirm Password" id ="passwordConfirmation" oninput="verifyCredentials()" required disabled>
+                <input type="text" name="phone_number" id="phoneNumber" placeholder="Phone Number" maxlength="10" oninput="validatePhoneNumber()" onfocus="showWarning('phoneNumberWarning')" onblur="hideWarning('phoneNumberWarning')"required>
+                <div>
+                    <span class="warningMessages" id="phoneNumberWarning">The phone number can have 10 digis only and it must start with 07</span>
+                </div>
+                <input type="date" name="birth_date"required>
+                <input type="submit" value="Register" id="registerButton" disabled>
+                <a href="/users/login">I have an account</a>
+            </form>
+        </div>
+        <script type="module" src="/javascripts/registerScript.js"></script>
+    </body>
+</html>
