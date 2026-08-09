@@ -8,8 +8,8 @@
         <div id="registerFields">
             <h1>Register</h1>
             <form action="/users/createAccount" method="POST">
-                <input type="text" id="firstName" name="first_name" placeholder="First Name" oninput="isNameValid(firstName, isFirstNameValid)" onfocus="showWarning('firstNameAndLastNameWarning')" onblur="hideWarning('firstNameAndLastNameWarning')"required>
-                <input type="text" id="lastName" name="last_name" placeholder="Last Name" oninput="isNameValid(lastName, isLastNameValid)" onfocus="showWarning('firstNameAndLastNameWarning')" onblur="hideWarning('firstNameAndLastNameWarning')" required>
+                <input type="text" id="firstName" name="first_name" placeholder="First Name" required>
+                <input type="text" id="lastName" name="last_name" placeholder="Last Name" required>
                 <div>
                     <span class="warningMessages" id="firstNameAndLastNameWarning">First name and last name can contains letters, spaces and '-' only</span>
                 </div>
@@ -30,7 +30,7 @@
                     </div>
                 </div>
                 <input type="password" placeholder="Confirm Password" id ="passwordConfirmation" oninput="verifyCredentials()" required disabled>
-                <input type="text" name="phone_number" id="phoneNumber" placeholder="Phone Number" maxlength="10" oninput="validatePhoneNumber()" onfocus="showWarning('phoneNumberWarning')" onblur="hideWarning('phoneNumberWarning')"required>
+                <input type="text" name="phone_number" id="phoneNumber" placeholder="Phone Number" maxlength="10" required>
                 <div>
                     <span class="warningMessages" id="phoneNumberWarning">The phone number can have 10 digis only and it must start with 07</span>
                 </div>
