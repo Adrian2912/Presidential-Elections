@@ -76,10 +76,14 @@ form input {
 
 #passwordView {
     position: absolute;
-    transform: translate(-25px, 10px);
+    transform: translate(-25px, 15px);
 }
 
 img {
     width: 25px;
-    height: 28px;
+    height: 30px;
+}
+
+a {
+    text-decoration: none;
 }

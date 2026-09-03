@@ -1,0 +1,54 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+main {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+main>* {
+    margin: 100px;
+}
+
+#candidatesList {
+    border: 1px dashed #AAA;
+    border-radius: 10px;
+}
+
+#candidatesList>ol {
+    list-style-type: none;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+#candidatesList>ol li {
+    padding: 10px;
+    font-size: 25px;
+}
+
+#candidatesList>ol li::before {
+    color: #000;
+}
+
+#candidatesList>ol li:nth-child(1) {
+    color: #fff;
+    background: #FFD700;
+}
+
+#candidatesList>ol li:nth-child(2) {
+    color: #fff;
+    background: #C0C0C0;
+}
+
+#candidatesList>ol li:nth-child(3) {
+    color: #fff;
+    background:  #CD7F32;
+}
+

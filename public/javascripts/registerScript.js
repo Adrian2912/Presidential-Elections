@@ -1,4 +1,5 @@
 import { showPasswordStrengthParameters, hidePasswordStrengthParameters, checkPasswordStrength, showPassword, hidePassword } from "./passwordOperations.js";
+
 let firstName = document.getElementById("firstName");
 let lastName = document.getElementById("lastName");
 let password = document.getElementById("userPassword");
@@ -19,37 +20,51 @@ const isPhoneNumberValid = {
 firstName.addEventListener("input", () => {
     isNameValid(firstName, isFirstNameValid);
 });
+
 firstName.addEventListener("focus", () => {
     showWarning("firstNameAndLastNameWarning");
 });
+
 firstName.addEventListener("blur", () => {
     hideWarning("firstNameAndLastNameWarning");
 });
+
 lastName.addEventListener("input", () => {
     isNameValid(lastName, isLastNameValid);
 });
+
 lastName.addEventListener("focus", () => {
     showWarning("firstNameAndLastNameWarning");
 });
+
 lastName.addEventListener("blur", () => {
     hideWarning("firstNameAndLastNameWarning");
 });
+
 password.addEventListener("focus", showPasswordStrengthParameters);
 password.addEventListener("blur", hidePasswordStrengthParameters);
+
 password.addEventListener("input", () => {
     checkPasswordStrength(password);
+    verifyCredentials();
 });
+
+passwordConfirmation.addEventListener("input", verifyCredentials);
+
 passwordPeek.addEventListener("mouseover", () => {
     showPassword(password, passwordConfirmation);
 });
+
 passwordPeek.addEventListener("mouseout", () => {
     hidePassword(password, passwordConfirmation);
 });
 
 phoneNumber.addEventListener("input", validatePhoneNumber);
+
 phoneNumber.addEventListener("focus", () => {
     showWarning("phoneNumberWarning");
 });
+
 phoneNumber.addEventListener("blur", () => {
     hideWarning("phoneNumberWarning");
 });

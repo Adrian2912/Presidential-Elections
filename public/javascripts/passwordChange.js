@@ -21,7 +21,7 @@ passwordConfirmation.addEventListener("input", checkPasswordMatching);
 
 function checkPasswordMatching() {
     if (password.value === passwordConfirmation.value) {
-        passwordChangeButton.removeAttribute("disabled")
+        passwordChangeButton.removeAttribute("disabled");
     } else {
         passwordChangeButton.setAttribute("disabled", "disabled");
     }

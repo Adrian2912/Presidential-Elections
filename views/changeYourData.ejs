@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Change your data</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+        <link rel="stylesheet" href="/stylesheets/changeYourData.css">
+    </head>
+    <body>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <form action="/dataChanging" method="POST">
+                    <div>
+                        <label>First Name: </label>
+                        <input type="text" name="first_name" value="<%= user.first_name  %>"">
+                    </div>
+                    <div>
+                        <label>Last Name: </label>
+                        <input type="text" name="last_name" value="<%= user.last_name  %>">
+                    </div>
+                    <div>
+                        <label>Description: </label>
+                        <input type="text" name="description" value="<%= user.description  %>">
+                    </div>
+                    <div>
+                        <label>Phone Number: </label>
+                        <input type="text" name="phone_number" value="<%= user.phone_number  %>">
+                    </div>
+                    <div>
+                        <label>Birth Date: </label>
+                        <input type="date" name="birth_date"value="<%= user.birth_date.getFullYear()%><%= '-'%><%if (user.birth_date.getMonth() + 1 >= 10) { %><%= (user.birth_date.getMonth() + 1) %><%} else { %><%= '0' + (user.birth_date.getMonth() + 1) %><% } %><%='-'%><% if (user.birth_date.getDate() >= 10) {%><%= user.birth_date.getDate() %><% } else {%><%= '0' + user.birth_date.getDate()%><% } %>">
+                    </div>
+                    <input type="submit" value="change your data">
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
