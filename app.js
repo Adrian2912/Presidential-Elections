@@ -2,11 +2,13 @@ let createError = require('http-errors');
 let express = require('express');
 let path = require('path');
 let cookieParser = require('cookie-parser');
+let session = require('express-session')
 let logger = require('morgan');
 
 let indexRouter = require('./routes/index');
-let usersRouter = require('./routes/users');
-
+const usersRouter = require('./routes/users');
+const candidatesRouter = require('./routes/candidates');
+const votesRouter = require('./routes/voting');
 let app = express();
 
 // view engine setup
@@ -17,12 +19,14 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(session({secret : "Presidential-Elections-Do-Not-Tell-Anyone", name : "currentUser", cookie : { maxAge : 60000}}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 //app.use('/', indexRouter);
 //app.use('/users', usersRouter);
 app.use('/',usersRouter);
-
+app.use('/', candidatesRouter);
+app.use('/', votesRouter);
 app.get('/', (req, res) => {
   res.send("Wors");
 })

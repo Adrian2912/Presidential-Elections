@@ -7,8 +7,8 @@
         <link rel="stylesheet" href="/stylesheets/voteYourCandidate.css">
     </head>
     <body>
-        <form action="/vote" method="POST">
-            <ul> <% for (let i = 0; i < candidatesList.length; ++i) {%>
+        <form action="/vote" method="POST" class="d-flex flex-column flex-wrap justify-content-evenly align-items-center">
+            <ul class="d-flex flex-column flex-wrap justify-content-evenly align-items-center"> <% for (let i = 0; i < candidatesList.length; ++i) {%>
                 <li>
                     <%= (i + 1) + '.' + candidatesList[i].first_name + ' ' + candidatesList[i].last_name %>
                     <input type="radio" name="candidate" class="nameOfTheCandidate" onclick="voteYourCandidate()" value="<%= candidatesList[i].id %>">

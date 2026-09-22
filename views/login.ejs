@@ -9,7 +9,7 @@
         <div id="loginFields">
             <h1>Login</h1>-->
             <%- include('heading.ejs', {theTitle : "Presidential Elections-Login", styleSheetLink : "/stylesheets/loginStyle.css",  operationField : "loginFields", greeting :"Login"}) %>
-            <form action="/logIntoAccount" method="POST">
+            <form action="/login" method="POST">
                 <input type="email" name="email" placeholder="Email" required>
                 <div>
                     <input type="password" id="password" name="password" placeholder="Password" required>
@@ -21,7 +21,7 @@
                     <span id="warning"><%= message %></span>
                 </div>
                 <input type="submit" id="loginButton" value="Login">
-                <a href="/changePassword">Forgot Password</a>
+                <a href="/change-Password">Forgot Password</a>
                 <a href="/">Go back</a>
             </form>
         </div>

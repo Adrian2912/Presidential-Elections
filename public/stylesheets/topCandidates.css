@@ -6,11 +6,6 @@
 
 main {
     height: 100vh;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    align-items: center;
 }
 
 main>* {

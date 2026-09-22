@@ -13,14 +13,6 @@ ul {
     height: 500px;
 }
 
-ul, form {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    align-items: center;
-}
-
 li {
     border: 1px solid #aaa;
     border-radius: 10px;

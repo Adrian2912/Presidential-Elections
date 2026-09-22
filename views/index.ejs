@@ -1,5 +1,5 @@
             <%- include('heading.ejs', {theTitle : "Presidential Elections-Register", styleSheetLink : "/stylesheets/registerStyle.css",  operationField : "registerFields", greeting :"Register"}) %>
-            <form action="/createAccount" method="POST">
+            <form action="/register" method="POST">
                 <input type="text" id="firstName" name="first_name" placeholder="First Name" required>
                 <input type="text" id="lastName" name="last_name" placeholder="Last Name" required>
                 <div>
@@ -28,7 +28,7 @@
                 </div>
                 <input type="date" name="birth_date"required>
                 <input type="submit" value="Register" id="registerButton" disabled>
-                <a href="/login">I have an account</a>
+                <a href="/loginPage">I have an account</a>
             </form>
         </div>
         <script type="module" src="/javascripts/registerScript.js"></script>
