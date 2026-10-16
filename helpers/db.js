@@ -37,4 +37,5 @@ async function changeData(email, firstName, lastName, phoneNumber, birthDate, de
   }
 }
 
+
 module.exports = { client, addANewUser, getUserByEmail, changePassword, changeData };

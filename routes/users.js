@@ -1,12 +1,18 @@
 let express = require('express');
 let router = express.Router();
 const database = require('../helpers/db');
-const candidatesDataBase = require('../helpers/candidatesOperations')
+const candidatesDataBase = require('../helpers/candidatesOperations');
+const presidentialRound = require('../helpers/presidentialRounds');
 const bcrypt = require("bcrypt");
-let newUser;
 const userClass = require('../helpers/user');
+let newUser;
 
-/* GET users listing. */
+if (typeof localStorage === "undefined" || localStorage === null) {
+  const LocalStorage = require('node-localstorage').LocalStorage;
+  localStorage = new LocalStorage('./scratch');
+}
+
+
 router.get('/', function(req, res, next) {
   if (!req.session.user) {
     res.render('index');
@@ -25,9 +31,9 @@ router.post('/register', async (req, res) => {
   let birthdate = req.body.birth_date;
   database.addANewUser(firstName, lastName, email, password, phoneNumber, birthdate, 'Put your description here');
   const user = await database.getUserByEmail(req.body.email);
-  const possibleCandidateEmail = await database.getCandidateEmail(user.email);
+  const possibleCandidateEmail = await candidatesDataBase.getCandidateEmail(user.email);
   let isCandidate =  possibleCandidateEmail[0] !== undefined;
-  newUser = new userClass.user(user.id, user.first_name, user.last_name, user.email, user.password, user.phone_number, user.birth_date, user.description, user.has_voted, isCandidate);
+  newUser = new userClass.user(user.id, user.first_name, user.last_name, user.email, user.password, user.phone_number, user.birth_date, user.description, user.has_voted, isCandidate, user.isAdmin);
   req.session.user = newUser;
   res.redirect("/winnerCandidates");
 });
@@ -43,7 +49,7 @@ router.post('/login', async (req, res) => {
     if (passwordsAreEqual) {
       const possibleCandidateEmail = await candidatesDataBase.getCandidateEmail(user.email);
       let isCandidate = possibleCandidateEmail[0] !== undefined;
-      newUser = new userClass.user(user.id, user.first_name, user.last_name, user.email, user.password, user.phone_number, user.birth_date, user.description, user.has_voted, isCandidate);
+      newUser = new userClass.user(user.id, user.first_name, user.last_name, user.email, user.password, user.phone_number, user.birth_date, user.description, user.has_voted, isCandidate, user.role);
       req.session.user = newUser;
       res.redirect("/winnerCandidates");
     } else{
@@ -77,7 +83,8 @@ router.get('/winnerCandidates', async (req, res) => {
 
 router.get('/mainProfile', async (req, res) => {
   const user = await database.getUserByEmail(req.session.user.email);
-  res.render("mainProfile", { user,  userCandidacy : req.session.user.isCandidate});
+  res.render("mainProfile", { user,  userCandidacy : req.session.user.isCandidate, isAdmin : req.session.user.isAdmin});
+  console.log(localStorage.getItem("Presidential-Elections-Underway"));
 });
 
 router.get('/changeData', async (req, res) => {
@@ -88,6 +95,21 @@ router.get('/changeData', async (req, res) => {
 router.post('/dataChanging', async (req, res) => {
   await database.changeData(req.session.user.email, req.body.first_name, req.body.last_name, req.body.phone_number, req.body.birth_date, req.body.description);
   res.redirect("/mainProfile");
+});
+
+router.post('/updateElectionsState', async (req, res) => {
+  if (localStorage.getItem('Presidential-Elections-Underway') === 'ONGOING') {
+    presidentialRound.finishElectionsRound();
+    localStorage.setItem('Presidential-Elections-Underway', 'OVER');
+    res.redirect("/winnerCandidates");
+  } else if (localStorage.getItem('Presidential-Elections-Underway') === 'OVER') {
+    localStorage.setItem('Presidential-Elections-Underway', 'ONGOING');
+  }
+});
+
+router.get('/previousElectionsList', async (req, res) => {
+  const allPresidentialElections = await presidentialRound.getAllPresidentialElections();
+  res.render("electionsList", { allPresidentialElections });
 });
 
 module.exports = router;

@@ -30,7 +30,7 @@ async function getCandidateEmail(userEmail) {
   try {
     const candidateEmail = await client.query(`SELECT email FROM public."candidates" INNER JOIN public."Users" on public."candidates".id = public."Users".id where email = '${userEmail}';`);
     return candidateEmail.rows;
-  }catch (err) {
+  } catch (err) {
     console.error(err);
   }
 }

@@ -1,5 +1,5 @@
 class user {
-    constructor(id, firstName, lastName, email, password, phoneNumber, birthDate, description, hasVoted, isCandidate) {
+    constructor(id, firstName, lastName, email, password, phoneNumber, birthDate, description, hasVoted, isCandidate, isAdmin) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -9,7 +9,8 @@ class user {
         this.birthDate = birthDate;
         this.description = description;
         this.hasVoted = hasVoted;
-        this.isCandidate = isCandidate
+        this.isCandidate = isCandidate;
+        this.isAdmin = isAdmin;
     }
 }
 

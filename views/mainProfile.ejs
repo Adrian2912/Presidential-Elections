@@ -11,7 +11,7 @@
             footer>* {
                 margin: 20px 0;
             }
-            input[type="submit"] {
+            input[type="submit"], #electionsToggle {
                 font-size: 20px;
                 font-weight: bold;
                 color: #fff;
@@ -20,7 +20,7 @@
                 padding: 10px;
                 transition: transform 0.3s;
             }
-            input[type="submit"]:hover {
+            input[type="submit"]:hover, #electionsToggle:hover {
                 transform: scale(1.1);
             }
         </style>
@@ -70,7 +70,34 @@
                     <input type="submit" value="Withdraw from Presidential Elections" style="background: #f40;">
                 <% } %>
             </form>
+            <form action="/updateElectionsState" method="POST">
+            <% if (isAdmin === 'ADMIN') { %>
+                <button type="submit" id="electionsToggle" class="btn btn-success">
+                    
+                </button>
+            <% } %>
+            </form>
         </footer>
+        <script>
+            let electionsToggle = document.getElementById("electionsToggle");
+            updateElectionsState();
+            electionsToggle.addEventListener("click", () => {
+                if (localStorage.getItem("Presidential-Elections-Underway") === "GOING") {
+                    localStorage.setItem("Presidential-Elections-Underway", "OVER");
+                } else if (localStorage.getItem("Presidential-Elections-Underway") === "OVER") {
+                    localStorage.setItem("Presidential-Elections-Underway", "GOING");
+                }
+                updateElectionsState();
+            });
+
+            function updateElectionsState() {
+                if (localStorage.getItem("Presidential-Elections-Underway") === "OVER") {
+                    electionsToggle.innerText = "Start Presidential Elections";
+                } else if (localStorage.getItem("Presidential-Elections-Underway") === "GOING"){
+                    electionsToggle.innerText = "Finish Presidential Elections";
+                }
+            }
+        </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     </body>
 </html>

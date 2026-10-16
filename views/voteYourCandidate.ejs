@@ -8,14 +8,18 @@
     </head>
     <body>
         <form action="/vote" method="POST" class="d-flex flex-column flex-wrap justify-content-evenly align-items-center">
-            <ul class="d-flex flex-column flex-wrap justify-content-evenly align-items-center"> <% for (let i = 0; i < candidatesList.length; ++i) {%>
-                <li>
-                    <%= (i + 1) + '.' + candidatesList[i].first_name + ' ' + candidatesList[i].last_name %>
-                    <input type="radio" name="candidate" class="nameOfTheCandidate" onclick="voteYourCandidate()" value="<%= candidatesList[i].id %>">
-                </li>
-                <%}%>
-            </ul>
-            <input type="submit" value="Vote!" id="voteButton" disabled>
+            <% if (candidatesList.length > 0) { %>
+                <ul class="d-flex flex-column flex-wrap justify-content-evenly align-items-center"> <% for (let i = 0; i < candidatesList.length; ++i) {%>
+                    <li>
+                        <%= (i + 1) + '.' + candidatesList[i].first_name + ' ' + candidatesList[i].last_name %>
+                        <input type="radio" name="candidate" class="nameOfTheCandidate" onclick="voteYourCandidate()" value="<%= candidatesList[i].id %>">
+                    </li>
+                    <%}%>
+                </ul>
+                <input type="submit" value="Vote!" id="voteButton" disabled>
+                <% } else { %>
+                <h1>There are no candidates running for presidential elections</h1>
+            <% } %>
         </form>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
         <script src="/javascripts/candidateVoting.js"></script>
